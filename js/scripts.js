@@ -1,29 +1,37 @@
+var add = function(num1, num2) {
+	return num1 + num2;
+};
+var sub = function(num1, num2) {
+	return num1 - num2;
+};
+var mult = function(num1, num2) {
+	return num1 * num2;
+};
+var div = function(num1, num2) {
+	return num1 / num2;
+};
+
 $(document).ready(function() {
-  $("form#triangle").submit(function(event) {
-    var side1 = parseInt($("input#side1").val());
-    var side2 = parseInt($("input#side2").val());
-    var side3 = parseInt($("input#side3").val());
-
-
-     if (
-      ((side1 + side2) < side3 ) || ((side1 + side3) < side2 ) || ((side2 + side3) < side1 )
-    ) {
-      $("#notATriangle").show();
-    } else if ((side1 === side2) && (side1 === side3)) {
-      $("#equilateral").show();
-    } else if (
-      ((side1 === side2) && (side1 !== side3)) || ((side2 === side3) && (side2 !== side1)) || ((side1 === side3) && (side1 !== side2))
-    ) {
-      $("#isosceles").show();
-    } else if (
-      ((side1 !== side2) && (side2 !== side3) && (side1 !== side3))
-    ) {
-      $("#scalene").show();
-    }
-    else {
-      $("#notATriangle").show();
-    }
-
-    event.preventDefault();
+  $("form#calculator").submit(function(event) {
+		event.preventDefault();
+    var num1 = parseInt($("#input1").val());
+    var num2 = parseInt($("#input2").val());
+    var operator = $("input:radio[name=operator]:checked").val();
+    console.log("1st number: " + num1);  // for debugging
+    console.log("2nd number: " + num2);  // for debugging
+    console.log("operator: " + operator);  // for debugging
+    var result;
+    if (operator === "add") {
+      result = add(num1, num2);
+    } else if (operator === "subtract") {
+      result = sub(num1, num2);
+    } else if (operator === "multiply") {
+      result = mult(num1, num2);
+    } else if (operator === "divide") {
+      result = div(num1, num2);
+    } else {
+			alert("ERROR");
+		}
+    $("#output").text(result);
   });
 });
